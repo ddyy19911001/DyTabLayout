@@ -108,13 +108,16 @@ public class TabUtils {
         currentPageFragment = pageAdapter.getPage(0);
     }
 
-    public void initPageFg(Bundle bundle,SmartTabLayout tab, ViewPager viewPager, final Context activity, String[] names, FragmentManager fragmentManager,int layoutId,int tvId) {
+    public void initPageFg(List<Bundle> bundles,SmartTabLayout tab, ViewPager viewPager, final Context activity, String[] names, FragmentManager fragmentManager,int layoutId,int tvId) {
+        if(bundles.size()!=names.length){
+            throw new IllegalArgumentException("names number not equals bundles numbers!");
+        }
         FragmentPagerItems.Creator items = FragmentPagerItems.with(activity);
         for (int i = 0; i < names.length; i++) {
             String name = names[i];
-            bundle.putSerializable("name", name);
-            bundle.putInt("position", i);
-            items.add(name, pageFragment, bundle);
+            bundles.get(i).putSerializable("name", name);
+            bundles.get(i).putInt("position", i);
+            items.add(name, pageFragment, bundles.get(i));
         }
         FragmentPagerItems c = items.create();
         final FragmentPagerItemAdapter pageAdapter = new FragmentPagerItemAdapter(
