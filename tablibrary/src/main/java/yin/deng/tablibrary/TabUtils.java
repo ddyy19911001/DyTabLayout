@@ -19,7 +19,6 @@ import java.util.List;
 
 
 public class TabUtils {
-    static TabUtils tabUtils;
     static int normalColor;
     static int selectColor;
     //单个tab对应页面的fragment（通用）
@@ -31,9 +30,6 @@ public class TabUtils {
     //当前显示的fragment
     private Fragment currentPageFragment;
     private int currentPosition;
-    private TabUtils(){
-
-    }
 
     public int getCurrentPosition() {
         return currentPosition;
@@ -48,14 +44,10 @@ public class TabUtils {
         this.tvs = tvs;
     }
 
-    public static TabUtils getInstance(Class<? extends Fragment> fragmentDotClass, int normalTextColor, int selectTextColor){
-        if(tabUtils==null) {
-             tabUtils = new TabUtils();
-        }
+    public TabUtils(Class<? extends Fragment> fragmentDotClass, int normalTextColor, int selectTextColor){
         normalColor=normalTextColor;
         selectColor=selectTextColor;
         pageFragment=fragmentDotClass;
-        return tabUtils;
     }
 
     public Fragment getCurrentPageFragment(){
