@@ -19,17 +19,18 @@ import java.util.List;
 
 
 public class TabUtils {
-    static int normalColor;
-    static int selectColor;
+    public static int normalColor;
+    public static int selectColor;
     //单个tab对应页面的fragment（通用）
-    static Class<? extends Fragment> pageFragment;
+    public static Class<? extends Fragment> pageFragment;
     /**
      * 添加fragment到布局中
      */
     public List<TextView> tvs = new ArrayList<>();//用于存储tab
     //当前显示的fragment
     private Fragment currentPageFragment;
-    private int currentPosition;
+    public int currentPosition;
+    public FragmentPagerItemAdapter pageAdapter;
 
     public int getCurrentPosition() {
         return currentPosition;
@@ -50,9 +51,6 @@ public class TabUtils {
         pageFragment=fragmentDotClass;
     }
 
-    public Fragment getCurrentPageFragment(){
-        return currentPageFragment;
-    }
 
 
     public void initPageFg(SmartTabLayout tab, ViewPager viewPager, final Context activity, String[] names, FragmentManager fragmentManager,int layoutId,int tvId) {
@@ -65,7 +63,7 @@ public class TabUtils {
             items.add(name, pageFragment, bundle);
         }
         FragmentPagerItems c = items.create();
-        final FragmentPagerItemAdapter pageAdapter = new FragmentPagerItemAdapter(
+        pageAdapter = new FragmentPagerItemAdapter(
                 fragmentManager, c);
         viewPager.setOffscreenPageLimit(names.length);
         viewPager.setAdapter(pageAdapter);
@@ -112,7 +110,7 @@ public class TabUtils {
             items.add(name, pageFragment, bundles.get(i));
         }
         FragmentPagerItems c = items.create();
-        final FragmentPagerItemAdapter pageAdapter = new FragmentPagerItemAdapter(
+        pageAdapter = new FragmentPagerItemAdapter(
                 fragmentManager, c);
         viewPager.setOffscreenPageLimit(names.length);
         viewPager.setAdapter(pageAdapter);
